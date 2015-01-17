@@ -11,16 +11,16 @@ $characterMap = array(
 "I" => 8, "J" => 7, "K" => 14, "L" => 12, "M" => 15, "N" => 15,
 "O" => 14, "P" => 14, "Q" => 15, "R" => 14, "S" => 14, "T" => 14,
 "U" => 14, "V" => 14, "W" => 14, "X" => 14, "Y" => 14, "Z" => 14,
-"a" => 11, "b" => 11, "c" => 11, "d" => 11, "e" => 11, "f" => 11,
-"g" => 11, "h" => 11, "i" => 11, "j" => 11, "k" => 11, "l" => 11, "m" => 11,
-"n" => 11, "o" => 11, "p" => 11, "q" => 11, "r" => 11, "s" => 11, "t" => 11,
-"u" => 11, "v" => 11, "w" => 11, "x" => 11, "y" => 11, "z" => 11
+"a" => 10, "b" => 11, "c" => 11, "d" => 12, "e" => 12, "f" => 11,
+"g" => 13, "h" => 12, "i" => 8, "j" => 7, "k" => 11, "l" => 6, "m" => 16,
+"n" => 12, "o" => 13, "p" => 11, "q" => 11, "r" => 11, "s" => 11, "t" => 10,
+"u" => 11, "v" => 11, "w" => 15, "x" => 11, "y" => 11, "z" => 11
 );
 
 // $hashtagString will be initialized earlier
 //$hashtagString = "#JeSuisCharlie";
 //$hashtagString = "#AllBlackLivesMatter";
-$hashtagString = "#0123456789ABCEFGHIJKLMNOPQRSTUVWXYZ";
+$hashtagString = "#abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $width = 0; // will determine width of image
 //foreach (array_expression as $value)
 $charArray = str_split($hashtagString);
