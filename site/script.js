@@ -5,17 +5,52 @@ function hideButtons() {
 }
 
 function showPhotoOptions() {
-	document.getElementById("title").innerHTML = "Which photo?";
+	document.getElementById("title").innerHTML = "Which Photo?";
 	$("#coverSelect").fadeIn();
 	$("#profileSelect").fadeIn();
 }
 
-function findImage(type) {
-	$("coverSelect").fadeOut();
-	$("profileSelect").fadeOut();
+function showSelect(type) {
+	//$("#coverSelect").fadeOut();
+	//$("#profileSelect").fadeIn();
+	//document.getElementById("title").innerHTML = "Choose one!";
+	document.getElementsByTagName("img")[0].style.display = "none";
+	findOptions('cover');
+}
+
+function findOptions(type) {
+	$("#coverSelect").fadeOut();
+	$("#profileSelect").fadeOut();
+	$("#another").fadeIn();
+	$("#yes").fadeIn();
+	document.getElementById("title").innerHTML = "Is This Correct?";
 	if(type == "cover") {
-		getPhotos("Cover Photos");
+		getOptions("Cover Photos");
+	} 
+}
+
+function findImage(type, num) {
+	$("#coverSelect").fadeOut();
+	$("#profileSelect").fadeOut();
+	$("#another").fadeIn();
+	$("#yes").fadeIn();
+	document.getElementById("title").innerHTML = "Is This Correct?";
+	if(type == "cover") {
+		getPhoto("Cover Photos");
 	} else {
-		getPhotos("Profile Pictures");
+		getPhoto("Profile Pictures");
 	}
+}
+
+function pickTags(url) {
+	window.badgeURL = url;
+	window.badgeURL = encodeURIComponent(window.badgeURL);
+	var gridDiv = document.getElementsByClassName("topWrapper");
+	document.getElementById("title").innerHTML = "Pick Your Tags";
+	for(var i = 0; i < gridDiv.length; i++) {
+		gridDiv[i].style.display = "none";
+	}
+	$("#another").fadeOut();
+	$("#yes").fadeOut();
+	$(".tag").fadeIn();
 }

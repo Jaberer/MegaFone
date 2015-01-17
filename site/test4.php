@@ -2,7 +2,7 @@
 
 if(isset($_GET['url'])) {
 	
-	$url = $_GET['url'];
+	$url = rawurldecode($_GET['url']);
 	//$hashtagString = "asdfhaslkdfhsldfhsdjalskdjfhasdjfhlkah.com";
 	//$hashtagString = "...";
 	$characterMap = array(

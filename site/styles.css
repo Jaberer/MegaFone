@@ -18,7 +18,24 @@ body {
 	cursor:pointer;
 }
 
-#logout, #login, #getPhotos {
+.thumb {
+	height:130px;
+	width:200px;
+	background-size:cover;
+	display:inline-block;
+	margin:0px auto;
+	float:left;
+	cursor:pointer;
+}
+
+.topWrapper {
+    width:600px;
+	display:block;
+	margin:0px auto;
+    text-align:center;
+}
+
+#logout, #login, #getPhotos, #another, #yes {
 	display:block;
 	margin:0px auto;
 	background-color:white;
@@ -29,6 +46,10 @@ body {
 	margin-top:25px;
 	width:150px;
 	height:35px;
+}
+
+#another {
+	margin-right:20px;
 }
 
 #buttonscenter {
@@ -91,7 +112,7 @@ body {
 	transition:ease all .1s;
 }
 
-#logout, #getPhotos, #coverSelect, #profileSelect {
+#logout, #getPhotos, #coverSelect, #profileSelect, #another, #yes {
 	display:none;
 }
 
@@ -100,7 +121,7 @@ body {
 	color: #222222 !important;
 }
 
-#getPhotos:hover {
+#getPhotos:hover, #yes:hover, #another:hover {
 	background-color:#222222 !important;
 	color:white!important;
 	transition:ease all .1s;
@@ -114,10 +135,14 @@ body {
 }
 
 img {
-	width:80%;
+	width:600px;
 	height:auto;
 	margin:0px auto;
 	display:block;
+}
+
+.tag {
+	display:none;
 }
 
 #radioForm {
