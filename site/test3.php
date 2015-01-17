@@ -1,10 +1,15 @@
-<?php
-header('Content-Type: image/png');
+<?php // merges
+header('Content-Type: image/jpg');
 
-$bg = imagecreatefrompng('https://scontent-b.xx.fbcdn.net/hphotos-xap1/t31.0-8/s720x720/1973506_10202070758169184_5485992952186395972_o.jpg');
-$img = imagecreatefrompng('redSquare.png');
+// $url_background is initialized earlier
+// $boxes
 
-imagecopy($bg, $img, 50, 50, 0, 0, imagesx($bg), imagesy($bg));
+$bg = imagecreatefromjpeg($url); // works
+$img = imagecreatefromjpeg($boxes);
 
-imagepng($bg);
+//imagecopy($bg, $img, 50, 50, 0, 0, imagesx($bg), imagesy($bg));
+imagecopymerge ( $bg, $img , 50, 50, 0,0, imagesx($bg), imagesy($bg), 100);
+
+//imagepng($bg);
+imagejpeg($bg);
 ?>
