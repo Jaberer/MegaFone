@@ -62,12 +62,14 @@ for($i = 0; $i < count($StringArray); $i++)
 	$emerald = imagecolorallocate( $im, 46, 204, 113 );
 	$river = imagecolorallocate($im, 52, 152, 219);
 	$amethyst = imagecolorallocate($im, 155, 89, 182);
-	$turqouise = imagecolorallocate($im, 26, 188, 156);
-
+	$greenSea = imagecolorallocate($im, 22, 160, 133));
+	$alizarin = imagecolorallocate($im, 231, 76, 60);
+	$carrot = imagecolorallocate($im, 230, 126, 34);
+	
 $ColorArray = array(
-	0 => $emerald, 1 => $river, 2 => $amethyst, 3 => $turqouise,
-	4 => $emerald, 5 => $river, 6 => $amethyst, 7 => $turqouise,
-	8 => $emerald);
+	0 => $emerald, 1 => $river, 2 => $amethyst, 3 => $carrot,
+	4 => $alizarin, 5 => $emerald, 6 => $river, 7 => $amethyst,
+	8 => $greenSea);
 
 
 	imagefilledrectangle($im, 0, 0, 4000, 30, $ColorArray[$i]); // lol
