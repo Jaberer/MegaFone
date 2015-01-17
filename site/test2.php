@@ -20,7 +20,7 @@ $characterMap = array(
 // $hashtagString will be initialized earlier
 //$hashtagString = "#JeSuisCharlie";
 //$hashtagString = "#AllBlackLivesMatter";
-$hashtagString = "#abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+$hashtagString = "#0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $width = 0; // will determine width of image
 //foreach (array_expression as $value)
 $charArray = str_split($hashtagString);
@@ -40,8 +40,11 @@ $im = imagecreatetruecolor($width + 20, 30);
 $white = imagecolorallocate($im, 255, 255, 255);
 $grey = imagecolorallocate($im, 128, 128, 128);
 $emerald = imagecolorallocate( $im, 46, 204, 113 );
+$river = imagecolorallocate($im, 52, 152, 219);
+$amethyst = imagecolorallocate($im, 155, 89, 182);
+$turqouise = imagecolorallocate($im, 26, 188, 156);
 $black = imagecolorallocate($im, 0, 0, 0);
-imagefilledrectangle($im, 0, 0, 9999, 30, $emerald); // lol
+imagefilledrectangle($im, 0, 0, 9999, 30, $turqouise); // lol
 
 // The text to draw
 
