@@ -2,3 +2,36 @@ body {
 	padding: 0px;
 	margin:0px;
 }
+
+#title {
+	text-align:center;
+	font-size:40px;
+	color:#222222;
+	font-family:helvetica;
+	margin-top:150px;
+}
+
+#logout, #login, #getPhotos {
+	display:inline-block;
+	margin:0px auto;
+	background-color:white;
+	font-family:helvetica;
+	border:2px solid black;
+	border-radius:2px;
+	cursor:pointer;
+	margin-top:15px;
+}
+
+#status {
+	width:100%;
+	text-align:center;
+	font-family:helvetica;
+	margin-top:35px;
+}
+
+img {
+	width:80%;
+	height:auto;
+	margin:0px auto;
+	display:block;
+}
