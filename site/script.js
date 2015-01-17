@@ -11,6 +11,8 @@ function showPhotoOptions() {
 }
 
 function findImage(type) {
+	$("coverSelect").fadeOut();
+	$("profileSelect").fadeOut();
 	if(type == "cover") {
 		getPhotos("Cover Photos");
 	} else {
