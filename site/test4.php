@@ -62,7 +62,7 @@ for($i = 0; $i < count($StringArray); $i++)
 	$emerald = imagecolorallocate( $im, 46, 204, 113 );
 	$river = imagecolorallocate($im, 52, 152, 219);
 	$amethyst = imagecolorallocate($im, 155, 89, 182);
-	$greenSea = imagecolorallocate($im, 22, 160, 133));
+	$greenSea = imagecolorallocate($im, 22, 160, 133);
 	$alizarin = imagecolorallocate($im, 231, 76, 60);
 	$carrot = imagecolorallocate($im, 230, 126, 34);
 	
