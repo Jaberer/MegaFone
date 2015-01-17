@@ -125,11 +125,13 @@
 		);*/
 			<?php // creates textbox mini-image
 
-			if(isset($_GET['url'])) {
+				if(isset($_GET['url'])) {
 	
 				$url = rawurldecode($_GET['url']);
-				//$hashtagString = "asdfhaslkdfhsldfhsdjalskdjfhasdjfhlkah.com";
-				//$hashtagString = "...";
+				//$profilePic = ($_GET['profile']); // 1 or 0
+				//$profilePic = 1;
+				//$url = rawurldecode("https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10802084_10202178584064764_8997610770924410470_n.jpg?oh=e5d56a793a552100d1a1af87f426d776&oe=552A498A&__gda__=1428550623_13902483b6901e7a8d3bda315e7767ef");
+				
 				$characterMap = array(
 					"#" => 11, // perfect at 11
 					"0" => 10, "1" => 10, "2" => 12, "3" => 11, "4" => 11, "5" => 11, // perfect
@@ -150,13 +152,19 @@
 				$StringArray = array();
 
 			//$StringArray[0] = "#" . $_GET['tags']; // don't assign, just push
-			array_push($StringArray, "AllAreGreen", "JosephIsBetterThanNick", "TBT");
+			array_push($StringArray, "#AllAreGreen", "#JosephIsBetterThanNick", "#TBT");
 
 			// $url_background is initialized earlier
 			// $boxes
 			$bg = imagecreatefromjpeg($url); // works
-	
-			$length = 0;
+			if($profilePic === 1)
+			{
+				$length = 0;
+			}
+			else
+			{
+				$length = imagesx($bg);
+			}
 			for($i = 0; $i < count($StringArray); $i++)
 			{
 				$width = 0; // will determine width of image
@@ -166,6 +174,8 @@
 				{
 					$width += $characterMap[$value];
 				}
+	 
+			
 	 
 				// NEW WAY
 				// Create the image
@@ -207,13 +217,25 @@
 					imagecopymerge ($whiteSpace, $im , 5, 5, 0,0, imagesx($im), imagesy($im), 100); // white space updated
 					//imagejpeg($whiteSpace);
 					$img = $whiteSpace;
-
+					
 					imagealphablending($bg,true);
-					imagecopymerge ($bg, $img , $length, imagesy($bg) - imagesy($img), 0,0, imagesx($img), imagesy($img), 100); // new photo
-					$length += imagesx($img) - 5;
+					// CREATE FINAL PHOTO
+					if($profilePic === 1) // profile picture goes to bottom left of image
+					{
+						imagecopymerge ($bg, $img , $length, imagesy($bg) - imagesy($img), 0,0, imagesx($img), imagesy($img), 100); // new photo
+						$length += imagesx($img) - 5;
+					}
+					else // cover photo for going 
+					{
+						imagecopymerge ($bg, $img , $length - imagesx($img), imagesy($bg) * 2 / 3, 0,0, imagesx($img), imagesy($img), 100); // new photo
+						$length -= imagesx($img) - 5;
+					}
 				}
-				$photoID = rand(0,100000);
+				$photoID = rand(0,100000); // id the photo
 				$pathName = 'photos/' . $photoID . ".jpg";
+				
+				header("Content-type: image/jpeg");
+				//imagejpeg($bg);
 				imagejpeg($bg, $pathName);
 				echo "
 				FB.api(
@@ -229,7 +251,7 @@
 						}
 						);
 						";
-					}
+					}		
 					?>
 	}
   
