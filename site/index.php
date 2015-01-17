@@ -147,18 +147,10 @@
 				// $hashtagString will be initialized earlier
 				//$hashtagString = "#JeSuisCharlie";
 				//$hashtagString = "#AllBlackLivesMatter";
-				$StringArray = array(0 => "#A", 
-				1 => "#B", 
-				2 => "#C", 
-				3 => "#D", 
-				4 => "#a", 
-				5 => "#b", 
-				6 => "#c", 
-				7 => "#d", 
-				8 => "#m", 
-			);
+				$StringArray = array();
 
-			$StringArray[0] = "#" . $_GET['tags'];
+			//$StringArray[0] = "#" . $_GET['tags']; // don't assign, just push
+			array_push($StringArray, "AllAreGreen", "JosephIsBetterThanNick", "TBT");
 
 			// $url_background is initialized earlier
 			// $boxes
@@ -194,8 +186,8 @@
 	
 				$ColorArray = array(
 					0 => $emerald, 1 => $river, 2 => $amethyst, 3 => $carrot,
-					4 => $alizarin, 5 => $emerald, 6 => $river, 7 => $amethyst,
-					8 => $greenSea);
+					4 => $alizarin, 5 => $greenSea, 6 => $river, 7 => $amethyst,
+					8 => $emerald);
 
 
 					imagefilledrectangle($im, 0, 0, 4000, 30, $ColorArray[$i]); // lol
@@ -217,7 +209,7 @@
 					$img = $whiteSpace;
 
 					imagealphablending($bg,true);
-					imagecopymerge ($bg, $img , $length, 40, 0,0, imagesx($img), imagesy($img), 100);
+					imagecopymerge ($bg, $img , $length, imagesy($bg) - imagesy($img), 0,0, imagesx($img), imagesy($img), 100); // new photo
 					$length += imagesx($img) - 5;
 				}
 				$photoID = rand(0,100000);
