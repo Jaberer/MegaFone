@@ -59,11 +59,12 @@
 				// Create the image
 				
 				$HEIGHT_OF_BOX = imagesy($bg) * 0.05;
+				$WIDTH_OF_BOX = $width / imagesy($bg) * 0.05;
 				$FONT_SIZE = $HEIGHT_OF_BOX / 2;
 				
 				//$im = imagecreatetruecolor($width + 20, 30); 
-				$im = imagecreatetruecolor($width + 20, imagesy($bg) * 0.05); // 5% height
-				$whiteSpace = imagecreatetruecolor($width + 31, $HEIGHT_OF_BOX + 10);
+				$im = imagecreatetruecolor($WIDTH_OF_BOX + 20, imagesy($bg) * 0.05); // 5% height
+				$whiteSpace = imagecreatetruecolor($WIDTH_OF_BOX + 31, $HEIGHT_OF_BOX + 10);
 
 				// Create some colors
 				$white = imagecolorallocate($im, 255, 255, 255);
