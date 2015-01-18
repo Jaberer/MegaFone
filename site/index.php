@@ -157,8 +157,7 @@
 				$StringArray = array();
 
 				$TagStrings = $_GET['tags']; // #asdf#asdf#asdf
-				$strlen = strlen( $TagStrings);
-				$firstIndex = 0;
+				
 				$i;
 				$IndexOfHashes = array_keys(str_split($TagStrings, "#", true); // 0, 5, 10, ...
 				for($i = 0; $i < count($IndexOfHashes) - 1; $i++)
