@@ -156,16 +156,22 @@
 				//$hashtagString = "#AllBlackLivesMatter";
 				$StringArray = array();
 
-				$TagStrings = rawurldecode($_GET['tags']); // #asdf#asdf#asdf
+				$TagStrings = $_GET['tags']; // #asdf#asdf#asdf
 				//$TagStrings = "#asdf#asdf#asdf";
 				
 				$i;
 				$IndexOfHashes = array_keys(str_split($TagStrings, "%23", true); // 0, 5, 10, ...
 				for($i = 0; $i < count($IndexOfHashes) - 1; $i++)
 				{
-					array_push($StringArray(my_substr_function($TagStrings, $IndexOfHashes[$i], $IndexOfHashes[$i + 1]))); // 05, 510, 
+					array_push($StringArray(my_substr_function($TagStrings, $IndexOfHashes[$i], $IndexOfHashes[$i + 1]))); // 05, 510
+					
 				}
 				array_push($StringArray(substr($TagStrings, $IndexOfHashes[$i], count($IndexOfHashes)))); 
+				
+				for($j = 0; $j < 3; $j++)
+				{
+					echo $IndexOfHashes[$j];
+				}
 				
 				function my_substr_function($str, $start, $end)
 				{
