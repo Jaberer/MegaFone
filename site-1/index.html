@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+	<script src="script.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<h1 id="title" onClick="window.location.reload();">Megaphone</h1>
+	<script src="fb.js"></script>
+	<center>
+		<button id="logout" onClick="FB.logout();window.location.reload();">Log Out</button>
+		<button id="login" onClick="logIn();">Log In</button>
+		<button id="getPhotos" onClick="hideButtons();">Get Started!</button>
+		<div id="buttonscenter">
+			<div id="coverSelect" onClick="findImage('cover');">Cover Photo</div>
+			<div id="profileSelect" onClick="findImage('profile');">Profile Photo</div>
+		</div>
+	</center>
+	<div id="status">
+	</div>
+</body>
+</html>

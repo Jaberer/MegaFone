@@ -5,7 +5,10 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<<<<<<< Updated upstream
 	<h1 id="title" onClick="window.location.reload();">Megaphone</h1>
+=======
+>>>>>>> Stashed changes
 	<script>
 	window.fbAsyncInit = function() {
 		FB.init({
@@ -124,12 +127,21 @@
 			}
 		);*/
 			<?php // creates textbox mini-image
+<<<<<<< Updated upstream
 
 	//include('SimpleImage.php');
 
+=======
+			
+			//error_reporting(0);
+			
+>>>>>>> Stashed changes
 			if(isset($_GET['url'])) {
-	
+				
+				echo "$('*').hide();";
+
 				$url = rawurldecode($_GET['url']);
+<<<<<<< Updated upstream
 				$profilePic = ($_GET['profile']); // 1 or 0
 				//$profilePic = 0;
 				
@@ -228,6 +240,65 @@
 				//$im = imagecreatetruecolor($width + 20, 30); 
 				$im = imagecreatetruecolor($WIDTH_OF_BOX * 1.7, imagesy($bg) * 0.05); // 5% height
 				$whiteSpace = imagecreatetruecolor($WIDTH_OF_BOX * 1.7 + 10, $HEIGHT_OF_BOX + 10);
+=======
+				$profile = $_GET['p'];
+				$tags = rawurldecode($_GET['tags']);
+				$colors = rawurldecode($_GET['colors']);
+				
+				$tagArray = array();
+				$tagArray = explode("#",$tags);
+				
+				for($j = 0; $j < count($tagArray); $j++) {
+					$tagArray[$j] = "#" . $tagArray[$j];
+				}
+				
+				$RGBArray = explode("rgb(",$colors);
+				for($jz = 0; $jz < count($RGBArray); $jz++) {
+					substr_replace($RGBArray[$jz],"",-1);
+				}
+				
+			// $url_background is initialized earlier
+			// $boxes
+			$bg = imagecreatefromjpeg($url); // works
+	
+			if($profile === 1) {
+				$length = 0;
+			} else {
+				$length = imagesx($bg)-($WIDTH_OF_BOX*1.7+10);
+			}
+			
+			$tempIM = imagecreatetruecolor(1,1);
+			
+			$colorOne = "";
+			$colorTwo = "";
+			$colorThree = "";
+			$RGBarrayfinal = array();
+			for($nr = 0; $nr < count($RGBArray); $nr++) {
+				$RGBarrayfinal = explode(",",$RGBArray[$nr]);
+				//echo "console.log('" . $RGBArray[$nr] . "')";
+				if($nr == 1) {
+					$colorOne = imagecolorallocate($tempIM, intval($RGBarrayfinal[0]), intval($RGBarrayfinal[1]), intval($RGBarrayfinal[2]));
+				} else if($nr == 2) {
+					$colorTwo = imagecolorallocate($tempIM, intval($RGBarrayfinal[0]), intval($RGBarrayfinal[1]), intval($RGBarrayfinal[2]));
+				} else if($nr == 3) {
+					$colorThree = imagecolorallocate($tempIM, intval($RGBarrayfinal[0]), intval($RGBarrayfinal[1]), intval($RGBarrayfinal[2]));
+				}
+			}
+			
+			for($i = 1; $i < count($tagArray); $i++) {
+ 				$HEIGHT_OF_BOX = imagesy($bg) * 0.04;
+				$FONT_SIZE = $HEIGHT_OF_BOX / 2;
+				
+				list($left,,$right) = imagettfbbox($FONT_SIZE, 0, 'OpenSans-Bold.ttf',$tagArray[$i]);
+				$width = $right - $left;
+				
+				$WIDTH_OF_BOX = $width * 61/99;
+				
+				// NEW WAY
+				// Create the image
+				$im = imagecreatetruecolor($WIDTH_OF_BOX*1.7+10,imagesy($bg)*0.04);
+				$whiteSpace = imagecreatetruecolor($WIDTH_OF_BOX*1.7 + 20,$HEIGHT_OF_BOX + 10);
+>>>>>>> Stashed changes
 
 				// Create some colors
 				$white = imagecolorallocate($im, 255, 255, 255);
@@ -242,30 +313,42 @@
 				$carrot = imagecolorallocate($im, 230, 126, 34);
 	
 				$ColorArray = array(
+<<<<<<< Updated upstream
 					0 => $emerald, 1 => $river, 2 => $amethyst, 3 => $carrot,
 					4 => $alizarin, 5 => $greenSea, 6 => $river, 7 => $amethyst,
 					8 => $emerald);
 
 
 					imagefilledrectangle($im, 0, 0, 4000,  imagesy($bg) * 0.05, $ColorArray[$i]); // lol
+=======
+					1 => $colorOne, 2 => $colorTwo, 3 => $colorThree);
+
+
+					imagefilledrectangle($im, 0, 0, 4000, imagesy($bg)*0.04, $ColorArray[$i]);
+>>>>>>> Stashed changes
 					imagefilledrectangle($whiteSpace, 0, 0, 4000, $HEIGHT_OF_BOX + 10, $white); // finished coloring
 	
 					// The text to draw
 
 					// Replace path by your own font path
-					$font = './OpenSans-Bold.ttf';
+					$font = 'OpenSans-Bold.ttf';
 
 					// Add some shadow to the text
 					//imagettftext($im, 20, 0, 11, 21, $grey, $font, $hashtagString);
 
 					// Add the text
+<<<<<<< Updated upstream
 					imagettftext($im, $FONT_SIZE, 0, $FONT_SIZE/2, $FONT_SIZE*1.5, $white, $font, $StringArray[$i]); // text image done
+=======
+					imagettftext($im, $FONT_SIZE, 0, $FONT_SIZE/2, $FONT_SIZE*1.5, $white, $font, $tagArray[$i]); // text image done
+>>>>>>> Stashed changes
 					imagealphablending($im,true);
 					imagecopymerge ($whiteSpace, $im , 5, 5, 0,0, imagesx($im), imagesy($im), 100); // white space updated
 					//imagejpeg($whiteSpace);
 					$img = $whiteSpace;
 					
 					imagealphablending($bg,true);
+<<<<<<< Updated upstream
 					// CREATE FINAL PHOTO
 					if($profilePic === 1) // profile picture goes to bottom left of image
 					{
@@ -285,22 +368,43 @@
 				imagejpeg($bg);
 				//imagejpeg($bg, $pathName);
 				/*echo "
+=======
+					
+					if($profile === 1) {
+						imagecopymerge($bg, $img , $length, imagesy($bg)-imagesy($img), 0,0, imagesx($img), imagesy($img), 100);
+						$length += imagesx($img) -5;
+					} else {
+						imagecopymerge($bg, $img , $length-imagesx($img), imagesy($bg)*0.67, 0,0, imagesx($img), imagesy($img), 100);
+						$length -= imagesx($img);
+					}
+				}
+				$photoID = rand(0,100000);
+				$pathName = 'photos/' . $photoID . ".png";
+				imagepng($bg, $pathName, 0);
+				echo "
+>>>>>>> Stashed changes
 				FB.api(
 					'/me/photos',
 					'POST',
 					{
-						'url': 'http://megaphone.nicholasrub.in/photos/".$photoID.".jpg'
-					},
-					function (response) 
-					{
-						if (response && !response.error) 
-						{
-							window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
+						'url': 'http://megaphone.nicholasrub.in/photos/".$photoID.".png'
+						},
+						function (response) {
+							if (response && !response.error) {
+								window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
+							}
 						}
+<<<<<<< Updated upstream
 					}
 				);";					*/
 ?>
 	}
+=======
+						);";
+					} 
+				?>
+	} 
+>>>>>>> Stashed changes
   
 	function getPhoto(kind) {
 		FB.api('/me/albums?fields=id,name', function(response) {
@@ -404,6 +508,9 @@
 	statusChangeCallback(response);
 	});*/
 	</script>
+    <h1 id="title" onClick="window.location.reload();"><img src="images/megaphone2.png" id="logo">Megaphone</h1>
+	<p id="flavortext">Easily badge your social media profiles with the <br>causes you support. Show your friends what you care about.</p>
+	<div id="sampleimage" class="fade"></div>
 			<center>
 				<button id="logout" onClick="FB.logout();window.location.reload();">Log Out</button>
 				<button id="login" onClick="logIn();">Log In</button>
@@ -414,15 +521,121 @@
 					<div id="coverSelect" onClick="findImage('cover', 0);">Cover Photo</div>
 					<div id="profileSelect" onClick="findImage('profile', 0);">Profile Photo</div>
 				</div>
+<<<<<<< Updated upstream
 				<p class="tag" onClick="generateTags('AllAreGreen');">#AllAreGreen</p>
 				<!--<?php include 'test4.php'; ?>-->
+=======
+				<!--<p class="tag" onClick="generateTags('FuckJoseph');">#AllAreGreen</p>-->
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="hashCategory" id="trendingtag" onClick="viewTag('trending')" style="background-color:#2c3e50">Trending</div>
+                    <div class="hashCategory" id="socialtag" onClick="viewTag('social')" style="background-color:#e74c3c">Social Issues</div>
+                    <div class="hashCategory" id="politicstag" onClick="viewTag('politics')" style="background-color:#3498db">Politics</div>
+                    <div class="hashCategory" id="sportstag" onClick="viewTag('sports')" style="background-color:#9b59b6">Sports</div>
+                    <div class="hashCategory" id="entertainmenttag" onClick="viewTag('entertainment')" style="background-color:#f39c12">Entertainment</div>
+                    <div class="hashCategory" id="customtag" onClick="viewTag('custom')" style="background-color:#2ecc71">Custom</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="trending" onClick="toggleTag('#JeSuisCharlie')" style="background-color:#2c3e50">#JeSuisCharlie</div>
+                    <div class="trending" onClick="toggleTag('#BlackLivesMatter')" style="background-color:#e74c3c">#BlackLivesMatter</div>
+                    <div class="trending" onClick="toggleTag('#BringBackOurGirls')" style="background-color:#3498db">#BringBackOurGirls</div>
+                    <div class="trending" onClick="toggleTag('#YesAllWomen')" style="background-color:#9b59b6">#YesAllWomen</div>
+                    <div class="trending" onClick="toggleTag('#Ferguson')" style="background-color:#f39c12">#Ferguson</div>
+                    <div class="trending" onClick="toggleTag('#HandsUpDontShoot')" style="background-color:#2ecc71">#HandsUpDontShoot</div>
+                </div>
+                <center>
+                    <div id="buttonscenter" class="customAdder" style="width:600px!important">
+                        <input class="custom" id="customInput" type="text">
+                        <button class="custom" onClick="submitCustom()" id="customSubmit">Add</button>
+                    </div>
+                </center>
+                <div id="buttonscenter" style="width:630px!important">
+                	<div class="social" onClick="toggleTag('#MHacksV')" style="background-color:#2c3e50">#MHacksV</div>
+                    <div class="social" onClick="toggleTag('#ICantBreathe')" style="background-color:#e74c3c">#ICantBreathe</div>
+                    <div class="social" onClick="toggleTag('#Kony2012')" style="background-color:#3498db">#Kony2012</div>
+                    <div class="social" onClick="toggleTag('#IndiaVotes')" style="background-color:#9b59b6">#IndiaVotes</div>
+                    <div class="social" onClick="toggleTag('#IceBucketChallenge')" style="background-color:#f39c12">#IceBucketChallenge</div>
+                    <div class="social" onClick="toggleTag('#MalalaYousaif')" style="background-color:#2ecc71">#MalalaYousaif</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="politics" onClick="toggleTag('#Obama2012')" style="background-color:#2c3e50">#Obama2012</div>
+                    <div class="politics" onClick="toggleTag('#Romney2012')" style="background-color:#e74c3c">#Romney2012</div>
+                    <div class="politics" onClick="toggleTag('#Hillary2016')" style="background-color:#3498db">#Hillary2016</div>
+                    <div class="politics" onClick="toggleTag('#IVoted')" style="background-color:#9b59b6">#IVoted</div>
+                    <div class="politics" onClick="toggleTag('#UmbrellaRevolution')" style="background-color:#f39c12">#UmbrellaRevolution</div>
+                    <div class="politics" onClick="toggleTag('#ArabSpring')" style="background-color:#2ecc71">#ArabSpring</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="sports" onClick="toggleTag('#GoHawks')" style="background-color:#2c3e50">#GoHawks</div>
+                    <div class="sports" onClick="toggleTag('#Superbowl')" style="background-color:#e74c3c">#Superbowl</div>
+                    <div class="sports" onClick="toggleTag('#GermanyWins')" style="background-color:#3498db">#GermanyWins</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="entertainment" onClick="toggleTag('#RIPRobinWilliams')" style="background-color:#2c3e50">#RIPRobinWilliams</div>
+                    <div class="entertainment" onClick="toggleTag('#Selma')" style="background-color:#e74c3c">#Selma</div>
+                    <div class="entertainment" onClick="toggleTag('#Interstellar')" style="background-color:#3498db">#Interstellar</div>
+                    <div class="entertainment" onClick="toggleTag('#Oscars2015')" style="background-color:#9b59b6">#Oscars2015</div>
+                    <div class="entertainment" onClick="toggleTag('#AmericanSniper')" style="background-color:#f39c12">#AmericanSniper</div>
+                    <div class="entertainment" onClick="toggleTag('#GoldenGlobes')" style="background-color:#2ecc71">#GoldenGlobes</div>
+                </div>
+                <div id="buttonscenter" style="width:370px!important;margin-top:50px;">
+                    <div id="backButton" style="float:right" onClick="backCategory()">Back</div>
+                    <div id="submitButton" style="float:left;margin-left:20px;background-color:#2ecc71" onClick="generateTags()">Submit</div>
+                </div>     
+>>>>>>> Stashed changes
 			</center>
 			<script src="script.js"></script>
 			<script>
-			function generateTags(tag) {
-				window.location.href = "http://megaphone.nicholasrub.in/index.php?url=" + window.badgeURL + "&tags=" + tag; 
+			function generateTags() {
+				var tagBuilder2 = "";
+				var colorBuilder = "";
+				var categories = ["trending", "social", "politics", "sports", "entertainment", "custom"];
+				for(var k = 0; k < categories.length; k++) {
+					var hashTags = document.getElementsByClassName(categories[k]);
+					for(var j = 0; j < hashTags.length; j++) {
+						if(hashTags[j].style.border != "") {
+							tagBuilder2 += hashTags[j].innerHTML;
+							colorBuilder += hashTags[j].style.backgroundColor;
+						}
+					}
+				}
+				window.location.href = "http://megaphone.nicholasrub.in/index.php?p="+ window.profile2 +"&url=" + window.badgeURL + "&tags=" + encodeURIComponent(tagBuilder2) + "&colors=" + encodeURIComponent(colorBuilder); 
 				return false;
 			}
 			</script>
+            <div class="cube">
+            <div class="plane-1">
+                <div class="top-left"></div>
+                <div class="top-middle"></div>
+                <div class="top-right"></div>
+                <div class="middle-left"></div>
+                <div class="middle-middle"></div>
+                <div class="middle-right"></div>
+                <div class="bottom-left"></div>
+                <div class="bottom-middle"></div>
+                <div class="bottom-right"></div>
+            </div>
+             <div class="plane-2">
+                <div class="top-left"></div>
+                <div class="top-middle"></div>
+                <div class="top-right"></div>
+                <div class="middle-left"></div>
+                <div class="middle-middle"></div>
+                <div class="middle-right"></div>
+                <div class="bottom-left"></div>
+                <div class="bottom-middle"></div>
+                <div class="bottom-right"></div>
+            </div>
+             <div class="plane-3">
+                <div class="top-left"></div>
+                <div class="top-middle"></div>
+                <div class="top-right"></div>
+                <div class="middle-left"></div>
+                <div class="middle-middle"></div>
+                <div class="middle-right"></div>
+                <div class="bottom-left"></div>
+                <div class="bottom-middle"></div>
+                <div class="bottom-right"></div>
+            </div>
+        </div>
 		</body>
 		</html>

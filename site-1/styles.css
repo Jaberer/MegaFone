@@ -1,0 +1,136 @@
+body {
+	padding: 0px;
+	margin:0px;
+}
+
+#logo {
+	display:inline;
+	height:32px;
+	width:auto;
+}
+
+#title {
+	text-align:center;
+	font-size:40px;
+	color:#222222;
+	font-family:helvetica;
+	margin-top:150px;
+	cursor:pointer;
+}
+
+#logout, #login, #getPhotos {
+	display:block;
+	margin:0px auto;
+	background-color:white;
+	font-family:helvetica;
+	border:2px solid black;
+	border-radius:2px;
+	cursor:pointer;
+	margin-top:25px;
+	width:150px;
+	height:35px;
+}
+
+#buttonscenter {
+	width:300px;
+	margin:0 auto;
+}
+
+#coverSelect, #profileSelect {
+	margin:0px auto;
+	background-color:white;
+	font-family:helvetica;
+	border:2px solid black;
+	border-radius:2px;
+	cursor:pointer;
+	margin-top:15px;
+	width:120px;
+	height:45px;
+	font-size:12px;
+	padding-top:75px;
+}
+
+#profileSelect {
+	float:left;
+	background-image:url("images/profile_dark.png");
+	background-size:35px;
+	background-repeat:no-repeat;
+	background-position: 50% 35%;
+	transition:ease all .1s;
+}
+
+#profileSelect:hover {
+	background-color:#222222!important;
+	background-image:url("images/profile_light.png");
+	color:white!important;
+}
+
+#coverSelect {
+	float:right;
+	background-image:url("images/cover_dark.png");
+	background-size:35px;
+	background-repeat:no-repeat;
+	background-position: 50% 35%;
+	transition:ease all .1s;
+}
+
+#coverSelect:hover {
+	background-color:#222222!important;
+	background-image:url("images/cover_light.png");
+	color:white!important;
+}
+
+#login, #logout {
+	border:2px solid #3b5998 !important;
+	color: #3b5998 !important;
+}
+
+#login:hover, #logout:hover {
+	background-color:#3b5998 !important;
+	color:white!important;
+	transition:ease all .1s;
+}
+
+#logout, #getPhotos, #coverSelect, #profileSelect {
+	display:none;
+}
+
+#getPhotos {
+	border:2px solid #222222 !important;
+	color: #222222 !important;
+}
+
+#getPhotos:hover {
+	background-color:#222222 !important;
+	color:white!important;
+	transition:ease all .1s;
+}
+
+#status {
+	width:100%;
+	text-align:center;
+	font-family:helvetica;
+	margin-top:35px;
+}
+
+img {
+	width:80%;
+	height:auto;
+	margin:0px auto;
+	display:block;
+}
+
+#radioForm {
+	display:none;
+}
+
+#radioForm input {
+	display:inline;
+}
+
+#radioForm label {
+	display:inline;
+	font-family:helvetica;
+}
+
+

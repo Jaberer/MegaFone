@@ -1,20 +1,20 @@
 function hideButtons() {
-	$("#logout").fadeOut();
-	$("#getPhotos").fadeOut();
-	$("#demo").fadeOut();
+	$("#logout").hide();
+	$("#getPhotos").hide();
+	$("#demo").hide();
 	document.getElementById('flavortext').innerHTML = "Badge your profile photo or cover photo?";
-	setTimeout(showPhotoOptions, 500);
+	showPhotoOptions();
 }
 
 function showPhotoOptions() {
 	document.getElementById("title").innerHTML = "Which Photo?";
-	$("#coverSelect").fadeIn();
-	$("#profileSelect").fadeIn();
+	$("#coverSelect").show();
+	$("#profileSelect").show();
 }
 
 function showSelect(type) {
-	//$("#coverSelect").fadeOut();
-	//$("#profileSelect").fadeIn();
+	//$("#coverSelect").hide();
+	//$("#profileSelect").show();
 	//document.getElementById("title").innerHTML = "Choose one!";
 	document.getElementsByTagName("img")[0].style.display = "none";
 	if(type == 'cover') {
@@ -27,33 +27,37 @@ function showSelect(type) {
 function findOptions(type) {
 	document.getElementById("title").innerHTML = "Select a photo.";
 	document.getElementById('flavortext').innerHTML = "From your cover or profile photos album.";
-	$("#coverSelect").fadeOut();
-	$("#profileSelect").fadeOut();
-	$("#anothercover").fadeOut();
-	$("#anotherprof").fadeOut();
-	$("#yes").fadeOut();
-	//$("#yes").fadeIn();
+	$("#coverSelect").hide();
+	$("#profileSelect").hide();
+	$("#anothercover").hide();
+	$("#anotherprof").hide();
+	$("#yes").hide();
+	//$("#yes").show();
 	//document.getElementById("title").innerHTML = "Is This Correct?";
 	if(type == "cover") {
-		//$("#anothercover").fadeIn();
+		//$("#anothercover").show();
+		window.profile2 = 0;
 		getOptions("Cover Photos");
 	} else {
-		//$("#anotherprof").fadeIn();
+		//$("#anotherprof").show();
+		window.profile2 = 1;
 		getOptions("Profile Pictures");
 	}
 }
 
 function findImage(type, num) {
 	document.getElementById('flavortext').innerHTML = "Pressing no will let you choose a different photo.";
-	$("#coverSelect").fadeOut();
-	$("#profileSelect").fadeOut();
-	$("#yes").fadeIn();
+	$("#coverSelect").hide();
+	$("#profileSelect").hide();
+	$("#yes").show();
 	document.getElementById("title").innerHTML = "Is This Correct?";
 	if(type == "cover") {
-		$("#anothercover").fadeIn();
+		$("#anothercover").show();
+		window.profile2 = 0;
 		getPhoto("Cover Photos");
 	} else {
-		$("#anotherprof").fadeIn();
+		$("#anotherprof").show();
+		window.profile2 = 1;
 		getPhoto("Profile Pictures");
 	}
 }
@@ -66,10 +70,10 @@ function pickTags(url) {
 	for(var i = 0; i < gridDiv.length; i++) {
 		gridDiv[i].style.display = "none";
 	}
-	$("#anothercover").fadeOut();
-	$("#anotherprof").fadeOut();
-	$("#yes").fadeOut();
-	$(".tag").fadeIn();
+	$("#anothercover").hide();
+	$("#anotherprof").hide();
+	$("#yes").hide();
+	$(".tag").show();
 	var tagCategories = document.getElementsByClassName('hashCategory');
 	for(var j = 0; j < tagCategories.length; j++) {
 		tagCategories[j].style.display = "inline-block";
@@ -83,10 +87,10 @@ function pickTagsSingle() {
 	document.getElementsByTagName('img')[0].style.display="none";
 	document.getElementById("title").innerHTML = "Pick Your Tags!";
 	document.getElementById('flavortext').innerHTML = "Support the causes that matter most to you.";
-	$("#anothercover").fadeOut();
-	$("#anotherprof").fadeOut();
-	$("#yes").fadeOut();
-	$(".tag").fadeIn();
+	$("#anothercover").hide();
+	$("#anotherprof").hide();
+	$("#yes").hide();
+	$(".tag").show();
 	var tagCategories = document.getElementsByClassName('hashCategory');
 	for(var j = 0; j < tagCategories.length; j++) {
 		tagCategories[j].style.display = "inline-block";
@@ -103,6 +107,7 @@ function viewTag(id) {
 		hashTags[j].style.display = "inline-block";
 	}
 	document.getElementById('backButton').style.display = "block";
+	document.getElementById('submitButton').style.display = "block";
 }
 
 function backCategory() {
@@ -110,7 +115,7 @@ function backCategory() {
 	for(var i = 0; i < tagButtons.length; i++) {
 		tagButtons[i].style.display = "inline-block";
 	}
-	var categories = ["trending", "social", "politics", "sports", "entertainment"];
+	var categories = ["trending", "social", "politics", "sports", "entertainment", "custom"];
 	for(var k =0; k < categories.length; k++) {
 		var hashTags = document.getElementsByClassName(categories[k]);
 		for(var j = 0; j < hashTags.length; j++) {
@@ -118,18 +123,19 @@ function backCategory() {
 		}
 	}
 	document.getElementById('backButton').style.display = "none";
+	document.getElementById('submitButton').style.display = "none";
 }
 
 window.tagCounter = 0;
 
 function toggleTag(tag) {
-	var categories = ["trending", "social", "politics", "sports", "entertainment"];
+	var categories = ["trending", "social", "politics", "sports", "entertainment", "custom"];
 	for(var k =0; k < categories.length; k++) {
 		var hashTags = document.getElementsByClassName(categories[k]);
 		for(var j = 0; j < hashTags.length; j++) {
 			if(hashTags[j].innerHTML == tag) {
 				if(hashTags[j].style.border == "" && window.tagCounter < 3) {
-					hashTags[j].style.border = "4px solid black";
+					hashTags[j].style.border = "3px solid #222222";
 					window.tagCounter += 1;
 				} else if (hashTags[j].style.border != "") {
 					hashTags[j].style.border = "";
@@ -143,4 +149,17 @@ function toggleTag(tag) {
 		}
 	}
 }
-	
+
+function submitCustom() {
+	var customText = document.getElementById('customInput').value;
+	var container = document.getElementsByClassName('customAdder')[0];
+	var tag = document.createElement('div');
+	container.appendChild(tag);
+	tag.className = tag.className + "custom";
+	tag.innerHTML = customText;
+	tag.style.backgroundColor = "#2c3e50";
+	tag.addEventListener("click", function() {	
+		toggleTag(customText);
+	});
+	viewTag('custom');
+}
