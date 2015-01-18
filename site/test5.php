@@ -9,8 +9,8 @@
 				$profilePic = 0;
 				
 				//$url = rawurldecode("https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10802084_10202178584064764_8997610770924410470_n.jpg?oh=e5d56a793a552100d1a1af87f426d776&oe=552A498A&__gda__=1428550623_13902483b6901e7a8d3bda315e7767ef");
-				//$url = rawurldecode("http://archive.eusa.eu/files/News/2012/photoc-camera_w2.jpg");
-				$url = rawurldecode("http://www.viralspell.com/wp-content/uploads/2014/04/NatGeo-7.jpg");
+				$url = rawurldecode("http://archive.eusa.eu/files/News/2012/photoc-camera_w2.jpg");
+				//$url = rawurldecode("http://www.viralspell.com/wp-content/uploads/2014/04/NatGeo-7.jpg");
 				
 				$characterMap = array(
 					"#" => 11,
