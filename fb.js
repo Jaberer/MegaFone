@@ -1,3 +1,19 @@
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : '340364762824610',
+		xfbml      : true,
+		version    : 'v2.2'
+	});
+};
+
+(function(d, s, id){
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) {return;}
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 
 //document.getElementById("login").style.display="block";
 
@@ -86,32 +102,119 @@ function testAPI() {
 		/*document.getElementById('status').innerHTML =
 		'Thanks for logging in, ' + response.name + '!';*/
 	});
+	FB.api(
+	    '/me/photos',
+	    'POST',
+	    {
+	        'url': 'http://megaphone.nicholasrub.in/photos/40363.jpg'
+	    },
+	    function (response) {
+	      if (response && !response.error) {
+			  console.log(response);
+	      }
+	    }
+	);
 }
   
-function getPhotos(kind) {
+function getPhoto(kind) {
 	FB.api('/me/albums?fields=id,name', function(response) {
 		for (var i=0; i<response.data.length; i++) {
 			var album = response.data[i];
 			if (album.name == kind){
-
 				FB.api('/'+album.id+'/photos', function(photos){
-					if (photos && photos.data && photos.data.length){
-						for (var j=0; j<1; j++){
-							var photo = photos.data[j];
-							// photo.picture contain the link to picture
-							var image = document.createElement('img');
-							image.src = photo.source;
-							document.body.appendChild(image);
-						}
+					if (photos && photos.data && photos.data.length) {
+						var urls = new Array();
+						var photo = photos.data[0];
+						var image = document.createElement('img');
+						image.src = photo.source;
+						var container = document.getElementById('singlephotohere');
+						container.innerHTML = container.innerHTML + image;
 					}
+						/*alert("yo");
+						if(num !== 1) {
+							var theParent = document.querySelector(".topWrapper");
+							for (var i = 0; i < theParent.children.length; i++) {
+							    var childElement = theParent.children[i];
+								var url = childElement.style.backgroundImage;
+								var finalURL = url.substring(4, url.length-1);
+							    childElement.addEventListener("click", function() {
+									pickTags(finalURL);
+								});
+							}
+						}*/
 				});
-
 				break;
 			}
 		}
 	});
 }
 
-FB.getLoginStatus(function(response) {
+function getOptions(kind) {
+	FB.api('/me/albums?fields=id,name', function(response) {
+		for (var i=0; i<response.data.length; i++) {
+			var album = response.data[i];
+			if (album.name == kind){
+				FB.api('/'+album.id+'/photos', function(photos){
+					if (photos && photos.data && photos.data.length){
+						var urls = new Array();
+						for (var j=0; j<photos.data.length; j++) {
+						    if (photos.data[j]) {
+								(function(j){  
+									var photo = photos.data[j];						
+									var wrapper = document.createElement('div');
+									wrapper.className = "topWrapper";
+									document.body.appendChild(wrapper);
+									var image = document.createElement('div');
+									wrapper.appendChild(image);
+									image.style.backgroundImage = "url("+photo.source+")";
+									//alert(image.style.backgroundImage);
+									image.className = "thumb";
+									urls[j] = photo.source;
+								    image.addEventListener("click", function() {
+										pickTags(urls[j]);
+									});
+								})(j);
+							}
+							//alert(photo.source);
+					 	    //var url = photo.source;
+							//getURLS(urls[j]);
+						}
+					}
+						/*alert("yo");
+						if(num !== 1) {
+							var theParent = document.querySelector(".topWrapper");
+							for (var i = 0; i < theParent.children.length; i++) {
+							    var childElement = theParent.children[i];
+								var url = childElement.style.backgroundImage;
+								var finalURL = url.substring(4, url.length-1);
+							    childElement.addEventListener("click", function() {
+									pickTags(finalURL);
+								});
+							}
+						}*/
+				});
+				break;
+			}
+		}
+	});
+}
+
+/*function postPhoto(url) {
+	alert("fuk");
+	FB.api(
+	    "/me/photos",
+	    "POST",
+	    {
+	        "url": url
+	    },
+	    function (response) {
+	      if (response && !response.error) {
+			  console.log("Image posted successfully! Maybe?");
+	      }
+	    }
+	);
+}*/
+
+/*FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
-});
+});*/

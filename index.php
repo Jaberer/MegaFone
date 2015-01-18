@@ -2,10 +2,17 @@
 <html>
 <head>
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<title>Megaphone | Share Your Passions</title>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/animate.css">
+    <script src="lib/sweet-alert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="lib/sweet-alert.css">
+	<meta charset="utf-8"/>
 </head>
 <body>
-	<h1 id="title" onClick="window.location.reload();">Megaphone</h1>
+	<h1 id="title" onClick="window.location.reload();"><img src="images/megaphone2.png" id="logo">Megaphone</h1>
+	<p id="flavortext">Easily badge your social media profiles with the <br>causes you support. Show your friends what you care about.</p>
+	<div id="sampleimage" class="fade"></div>
 	<script>
 	window.fbAsyncInit = function() {
 		FB.init({
@@ -128,12 +135,17 @@
 			if(isset($_GET['url'])) {
 	
 				$url = rawurldecode($_GET['url']);
+<<<<<<< Updated upstream:site/index.php
 				//$profilePic = ($_GET['profile']); // 1 or 0
 				
 				// testing code
 				//$profilePic = 1;
 				//$url = rawurldecode("https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10802084_10202178584064764_8997610770924410470_n.jpg?oh=e5d56a793a552100d1a1af87f426d776&oe=552A498A&__gda__=1428550623_13902483b6901e7a8d3bda315e7767ef");
 				
+=======
+				//$hashtagString = "asdfhaslkdfhsldfhsdjalskdjfhasdjfhlkah.com";
+				//$hashtagString = "...";
+>>>>>>> Stashed changes:index.php
 				$characterMap = array(
 					"#" => 11, // perfect at 11
 					"0" => 10, "1" => 10, "2" => 12, "3" => 11, "4" => 11, "5" => 11, // perfect
@@ -151,22 +163,24 @@
 				// $hashtagString will be initialized earlier
 				//$hashtagString = "#JeSuisCharlie";
 				//$hashtagString = "#AllBlackLivesMatter";
-				$StringArray = array();
+				$StringArray = array(0 => "#A", 
+				1 => "#B", 
+				2 => "#C", 
+				3 => "#D", 
+				4 => "#a", 
+				5 => "#b", 
+				6 => "#c", 
+				7 => "#d", 
+				8 => "#m", 
+			);
 
-			//$StringArray[0] = "#" . $_GET['tags']; // don't assign, just push
-			array_push($StringArray, "#AllAreGreen", "#JosephIsBetterThanNick", "#TBT");
+			$StringArray[0] = "#" . $_GET['tags'];
 
 			// $url_background is initialized earlier
 			// $boxes
 			$bg = imagecreatefromjpeg($url); // works
-			if($profilePic === 1)
-			{
-				$length = 0;
-			}
-			else
-			{
-				$length = imagesx($bg);
-			}
+	
+			$length = 0;
 			for($i = 0; $i < count($StringArray); $i++)
 			{
 				$width = 0; // will determine width of image
@@ -176,8 +190,6 @@
 				{
 					$width += $characterMap[$value];
 				}
-	 
-			
 	 
 				// NEW WAY
 				// Create the image
@@ -198,8 +210,8 @@
 	
 				$ColorArray = array(
 					0 => $emerald, 1 => $river, 2 => $amethyst, 3 => $carrot,
-					4 => $alizarin, 5 => $greenSea, 6 => $river, 7 => $amethyst,
-					8 => $emerald);
+					4 => $alizarin, 5 => $emerald, 6 => $river, 7 => $amethyst,
+					8 => $greenSea);
 
 
 					imagefilledrectangle($im, 0, 0, 4000, 30, $ColorArray[$i]); // lol
@@ -219,25 +231,13 @@
 					imagecopymerge ($whiteSpace, $im , 5, 5, 0,0, imagesx($im), imagesy($im), 100); // white space updated
 					//imagejpeg($whiteSpace);
 					$img = $whiteSpace;
-					
+
 					imagealphablending($bg,true);
-					// CREATE FINAL PHOTO
-					if($profilePic === 1) // profile picture goes to bottom left of image
-					{
-						imagecopymerge ($bg, $img , $length, imagesy($bg) - imagesy($img), 0,0, imagesx($img), imagesy($img), 100); // new photo
-						$length += imagesx($img) - 5;
-					}
-					else // cover photo for going 
-					{
-						imagecopymerge ($bg, $img , $length - imagesx($img), imagesy($bg) * 2 / 3, 0,0, imagesx($img), imagesy($img), 100); // new photo
-						$length -= imagesx($img) - 5;
-					}
+					imagecopymerge ($bg, $img , $length, 40, 0,0, imagesx($img), imagesy($img), 100);
+					$length += imagesx($img) - 5;
 				}
-				$photoID = rand(0,100000); // id the photo
+				$photoID = rand(0,100000);
 				$pathName = 'photos/' . $photoID . ".jpg";
-				
-				header("Content-type: image/jpeg");
-				//imagejpeg($bg);
 				imagejpeg($bg, $pathName);
 				echo "
 				FB.api(
@@ -252,9 +252,16 @@
 						{
 							window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
 						}
+<<<<<<< Updated upstream:site/index.php
 					}
 				);";					
 ?>
+=======
+						);
+						";
+					}
+					?>
+>>>>>>> Stashed changes:index.php
 	}
   
 	function getPhoto(kind) {
@@ -268,7 +275,14 @@
 							var photo = photos.data[0];
 							var image = document.createElement('img');
 							image.src = photo.source;
-							document.body.appendChild(image);
+							//document.body.appendChild(image);
+							var container = document.getElementById('singlephotohere');
+							var url = photo.source;
+							container.appendChild(image);
+							image.addEventListener("click", function() {
+								//alert("fuk");
+								pickTagsSingle(url);
+							});
 						}
 						/*alert("yo");
 						if(num !== 1) {
@@ -360,16 +374,69 @@
 	});*/
 	</script>
 			<center>
-				<button id="logout" onClick="FB.logout();window.location.reload();">Log Out</button>
+            	<div id="singlephotohere">
+                </div>
+            	<img src="images/demo.png" id="demo">
+            	<div id="buttonscenter" style="width:325px!important">
+					<button style="float:left;" id="logout" onClick="FB.logout();window.location.reload();">Log Out</button>
+                    <button style="float:right" id="getPhotos" onClick="hideButtons();">Get Started!</button>
+                </div>
 				<button id="login" onClick="logIn();">Log In</button>
 				<button id="getPhotos" onClick="hideButtons();">Get Started!</button>
-				<button id="another" onClick="showSelect();">Choose Another</button>
-				<button id="yes" onClick="showIssues();">Yes</button>
+				<button id="anothercover" onClick="showSelect('cover');">No</button>
+				<button id="anotherprof" onClick="showSelect('profile');">No</button>
+				<button id="yes" onClick="pickTagsSingle()">Yes</button>
 				<div id="buttonscenter">
 					<div id="coverSelect" onClick="findImage('cover', 0);">Cover Photo</div>
 					<div id="profileSelect" onClick="findImage('profile', 0);">Profile Photo</div>
 				</div>
-				<p class="tag" onClick="generateTags('AllAreGreen');">#AllAreGreen</p>
+				<!--<p class="tag" onClick="generateTags('FuckJoseph');">#AllAreGreen</p>-->
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="hashCategory" id="trendingtag" onClick="viewTag('trending')" style="background-color:#2c3e50">Trending</div>
+                    <div class="hashCategory" id="socialtag" onClick="viewTag('social')" style="background-color:#e74c3c">Social Issues</div>
+                    <div class="hashCategory" id="politicstag" onClick="viewTag('politics')" style="background-color:#3498db">Politics</div>
+                    <div class="hashCategory" id="sportstag" onClick="viewTag('sports')" style="background-color:#9b59b6">Sports</div>
+                    <div class="hashCategory" id="entertainmenttag" onClick="viewTag('entertainment')" style="background-color:#f39c12">Entertainment</div>
+                    <div class="hashCategory" id="customtag" onClick="viewTag('custom')" style="background-color:#2ecc71">Custom</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="trending" onClick="toggleTag('#JeSuisCharlie')" style="background-color:#2c3e50">#JeSuisCharlie</div>
+                    <div class="trending" onClick="toggleTag('#BlackLivesMatter')" style="background-color:#e74c3c">#BlackLivesMatter</div>
+                    <div class="trending" onClick="toggleTag('#BringBackOurGirls')" style="background-color:#3498db">#BringBackOurGirls</div>
+                    <div class="trending" onClick="toggleTag('#YesAllWomen')" style="background-color:#9b59b6">#YesAllWomen</div>
+                    <div class="trending" onClick="toggleTag('#Ferguson')" style="background-color:#f39c12">#Ferguson</div>
+                    <div class="trending" onClick="toggleTag('#HandsUpDontShoot')" style="background-color:#2ecc71">#HandsUpDontShoot</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="social" onClick="toggleTag('#MHacks')" style="background-color:#2c3e50">#MHacks</div>
+                    <div class="social" onClick="toggleTag('#ICantBreathe')" style="background-color:#e74c3c">#ICantBreathe</div>
+                    <div class="social" onClick="toggleTag('#Kony2012')" style="background-color:#3498db">#Kony2012</div>
+                    <div class="social" onClick="toggleTag('#IndiaVotes')" style="background-color:#9b59b6">#IndiaVotes</div>
+                    <div class="social" onClick="toggleTag('#IceBucketChallenge')" style="background-color:#f39c12">#IceBucketChallenge</div>
+                    <div class="social" onClick="toggleTag('#MalalaYousaif')" style="background-color:#2ecc71">#MalalaYousaif</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="politics" onClick="toggleTag('#Obama2012')" style="background-color:#2c3e50">#Obama2012</div>
+                    <div class="politics" onClick="toggleTag('#Romney2012')" style="background-color:#e74c3c">#Romney2012</div>
+                    <div class="politics" onClick="toggleTag('#Hillary2016')" style="background-color:#3498db">#Hillary2016</div>
+                    <div class="politics" onClick="toggleTag('#IVoted')" style="background-color:#9b59b6">#IVoted</div>
+                    <div class="politics" onClick="toggleTag('#UmbrellaRevolution')" style="background-color:#f39c12">#UmbrellaRevolution</div>
+                    <div class="politics" onClick="toggleTag('#ArabSpring')" style="background-color:#2ecc71">#ArabSpring</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="sports" onClick="toggleTag('#GoHawks')" style="background-color:#2c3e50">#GoHawks</div>
+                    <div class="sports" onClick="toggleTag('#Superbowl')" style="background-color:#e74c3c">#Superbowl</div>
+                    <div class="sports" onClick="toggleTag('#GermanyWins')" style="background-color:#3498db">#GermanyWins</div>
+                </div>
+                <div id="buttonscenter" style="width:600px!important">
+                	<div class="entertainment" onClick="toggleTag('#RIPRobinWilliams')" style="background-color:#2c3e50">#RIPRobinWilliams</div>
+                    <div class="entertainment" onClick="toggleTag('#Selma')" style="background-color:#e74c3c">#Selma</div>
+                    <div class="entertainment" onClick="toggleTag('#Interstellar')" style="background-color:#3498db">#Interstellar</div>
+                    <div class="entertainment" onClick="toggleTag('#Oscars2015')" style="background-color:#9b59b6">#Oscars2015</div>
+                    <div class="entertainment" onClick="toggleTag('#AmericanSniper')" style="background-color:#f39c12">#AmericanSniper</div>
+                    <div class="entertainment" onClick="toggleTag('#GoldenGlobes')" style="background-color:#2ecc71">#GoldenGlobes</div>
+                </div>
+                <div id="backButton" onClick="backCategory()">Back</div>
 				<!--<?php include 'test4.php'; ?>-->
 			</center>
 			<script src="script.js"></script>
