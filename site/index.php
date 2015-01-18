@@ -156,7 +156,8 @@
 				//$hashtagString = "#AllBlackLivesMatter";
 				$StringArray = array();
 
-				$TagStrings = $_GET['tags']; // #asdf#asdf#asdf
+				//$TagStrings = $_GET['tags']; // #asdf#asdf#asdf
+				$TagStrings = "#asdf#asdf#asdf";
 				
 				$i;
 				$IndexOfHashes = array_keys(str_split($TagStrings, "#", true); // 0, 5, 10, ...
