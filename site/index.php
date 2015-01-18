@@ -125,10 +125,12 @@
 		);*/
 			<?php // creates textbox mini-image
 
-				if(isset($_GET['url'])) {
+			if(isset($_GET['url'])) {
 	
 				$url = rawurldecode($_GET['url']);
 				//$profilePic = ($_GET['profile']); // 1 or 0
+				
+				// testing code
 				//$profilePic = 1;
 				//$url = rawurldecode("https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10802084_10202178584064764_8997610770924410470_n.jpg?oh=e5d56a793a552100d1a1af87f426d776&oe=552A498A&__gda__=1428550623_13902483b6901e7a8d3bda315e7767ef");
 				
@@ -243,16 +245,16 @@
 					'POST',
 					{
 						'url': 'http://megaphone.nicholasrub.in/photos/".$photoID.".jpg'
-						},
-						function (response) {
-							if (response && !response.error) {
-								window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
-							}
+					},
+					function (response) 
+					{
+						if (response && !response.error) 
+						{
+							window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
 						}
-						);
-						";
-					}		
-					?>
+					}
+				);";					
+?>
 	}
   
 	function getPhoto(kind) {

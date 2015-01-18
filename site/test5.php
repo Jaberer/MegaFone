@@ -1,11 +1,14 @@
 <?php // creates textbox mini-image
 
-			if(isset($_GET['url'])) {
+	//include('SimpleImage.php');
+
+			//if(isset($_GET['url'])) {
 	
-				$url = rawurldecode($_GET['url']);
+				//$url = rawurldecode($_GET['url']);
 				//$profilePic = ($_GET['profile']); // 1 or 0
-				//$profilePic = 1;
+				$profilePic = 1;
 				//$url = rawurldecode("https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10802084_10202178584064764_8997610770924410470_n.jpg?oh=e5d56a793a552100d1a1af87f426d776&oe=552A498A&__gda__=1428550623_13902483b6901e7a8d3bda315e7767ef");
+				$url = rawurldecode("http://archive.eusa.eu/files/News/2012/photoc-camera_w2.jpg");
 				
 				$characterMap = array(
 					"#" => 11, // perfect at 11
@@ -54,8 +57,13 @@
 	 
 				// NEW WAY
 				// Create the image
-				$im = imagecreatetruecolor($width + 20, 30);
-				$whiteSpace = imagecreatetruecolor($width + 31, 40);
+				
+				$HEIGHT_OF_BOX = imagesy($bg) * 0.05;
+				$FONT_SIZE = $HEIGHT_OF_BOX / 2;
+				
+				//$im = imagecreatetruecolor($width + 20, 30); 
+				$im = imagecreatetruecolor($width + 20, imagesy($bg) * 0.05); // 5% height
+				$whiteSpace = imagecreatetruecolor($width + 31, $HEIGHT_OF_BOX + 10);
 
 				// Create some colors
 				$white = imagecolorallocate($im, 255, 255, 255);
@@ -75,8 +83,8 @@
 					8 => $emerald);
 
 
-					imagefilledrectangle($im, 0, 0, 4000, 30, $ColorArray[$i]); // lol
-					imagefilledrectangle($whiteSpace, 0, 0, 4000, 40, $white); // finished coloring
+					imagefilledrectangle($im, 0, 0, 4000,  imagesy($bg) * 0.05, $ColorArray[$i]); // lol
+					imagefilledrectangle($whiteSpace, 0, 0, 4000, $HEIGHT_OF_BOX + 10, $white); // finished coloring
 	
 					// The text to draw
 
@@ -87,7 +95,7 @@
 					//imagettftext($im, 20, 0, 11, 21, $grey, $font, $hashtagString);
 
 					// Add the text
-					imagettftext($im, 15, 0, 10, 21, $white, $font, $StringArray[$i]); // text image done
+					imagettftext($im, $FONT_SIZE, 0, $FONT_SIZE/2, $FONT_SIZE*1.5, $white, $font, $StringArray[$i]); // text image done
 					imagealphablending($im,true);
 					imagecopymerge ($whiteSpace, $im , 5, 5, 0,0, imagesx($im), imagesy($im), 100); // white space updated
 					//imagejpeg($whiteSpace);
@@ -110,21 +118,21 @@
 				$pathName = 'photos/' . $photoID . ".jpg";
 				
 				header("Content-type: image/jpeg");
-				//imagejpeg($bg);
-				imagejpeg($bg, $pathName);
-				echo "
+				imagejpeg($bg);
+				//imagejpeg($bg, $pathName);
+				/*echo "
 				FB.api(
 					'/me/photos',
 					'POST',
 					{
 						'url': 'http://megaphone.nicholasrub.in/photos/".$photoID.".jpg'
-						},
-						function (response) {
-							if (response && !response.error) {
-								window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
-							}
+					},
+					function (response) 
+					{
+						if (response && !response.error) 
+						{
+							window.location.href = 'http://www.facebook.com/profile.php?preview_cover='+response.id;
 						}
-						);
-						";
-					}					
+					}
+				);";					*/
 ?>
