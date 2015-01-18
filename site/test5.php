@@ -6,13 +6,15 @@
 	
 				//$url = rawurldecode($_GET['url']);
 				//$profilePic = ($_GET['profile']); // 1 or 0
-				$profilePic = 1;
+				$profilePic = 0;
+				
 				//$url = rawurldecode("https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10802084_10202178584064764_8997610770924410470_n.jpg?oh=e5d56a793a552100d1a1af87f426d776&oe=552A498A&__gda__=1428550623_13902483b6901e7a8d3bda315e7767ef");
-				$url = rawurldecode("http://archive.eusa.eu/files/News/2012/photoc-camera_w2.jpg");
+				//$url = rawurldecode("http://archive.eusa.eu/files/News/2012/photoc-camera_w2.jpg");
+				$url = rawurldecode("http://www.viralspell.com/wp-content/uploads/2014/04/NatGeo-7.jpg");
 				
 				$characterMap = array(
-					"#" => 11, // perfect at 11
-					"0" => 10, "1" => 10, "2" => 12, "3" => 11, "4" => 11, "5" => 11, // perfect
+					"#" => 11,
+					"0" => 10, "1" => 10, "2" => 12, "3" => 11, "4" => 11, "5" => 11,
 					"6" => 11, "7" => 11, "8" => 11, "9" => 11, "A" => 14, "B" => 14,
 					"C" => 14, "D" => 14, "E" => 12, "F" => 12, "G" => 14, "H" => 14,
 					"I" => 8, "J" => 7, "K" => 14, "L" => 12, "M" => 15, "N" => 15,
@@ -30,8 +32,12 @@
 				$StringArray = array();
 
 			//$StringArray[0] = "#" . $_GET['tags']; // don't assign, just push
-			array_push($StringArray, "#AllAreGreen", "#JosephIsBetterThanNick", "#TBT");
-
+			//array_push($StringArray, "#AllAreGreen", "#JosephIsBetterThanNick", "#TBT");
+			//array_push($StringArray, "#0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			array_push($StringArray, "#0123456789");
+			array_push($StringArray, "#abcdefghijklmnopqrstuvwxyz");
+			array_push($StringArray, "#ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			
 			// $url_background is initialized earlier
 			// $boxes
 			$bg = imagecreatefromjpeg($url); // works
@@ -41,7 +47,7 @@
 			}
 			else
 			{
-				$length = imagesx($bg);
+				$length = imagesx($bg) * 0.95;
 			}
 			for($i = 0; $i < count($StringArray); $i++)
 			{
@@ -50,6 +56,7 @@
 				$charArray = str_split($StringArray[$i]);
 				foreach ($charArray as $value) 
 				{
+					//$width += mb_strwidth($StringArray[$i]) ;
 					$width += $characterMap[$value];
 				}
 	 
@@ -59,12 +66,19 @@
 				// Create the image
 				
 				$HEIGHT_OF_BOX = imagesy($bg) * 0.05;
-				$WIDTH_OF_BOX = $width / imagesy($bg) * 0.05;
 				$FONT_SIZE = $HEIGHT_OF_BOX / 2;
+				//$WIDTH_OF_BOX = $width*$HEIGHT_OF_BOX*.04;
+				//$WIDTH_OF_BOX = $width*$FONT_SIZE/ (imagesy($bg) / 10.6);
+				
+				
+				list($left,, $right) = imagettfbbox($FONT_SIZE, 0, './OpenSans-Bold.ttf', $StringArray[$i]);
+				$width = $right - $left;
+				
+				$WIDTH_OF_BOX = $width * 21/33;
 				
 				//$im = imagecreatetruecolor($width + 20, 30); 
-				$im = imagecreatetruecolor($WIDTH_OF_BOX + 20, imagesy($bg) * 0.05); // 5% height
-				$whiteSpace = imagecreatetruecolor($WIDTH_OF_BOX + 31, $HEIGHT_OF_BOX + 10);
+				$im = imagecreatetruecolor($WIDTH_OF_BOX * 1.7, imagesy($bg) * 0.05); // 5% height
+				$whiteSpace = imagecreatetruecolor($WIDTH_OF_BOX * 1.7 + 10, $HEIGHT_OF_BOX + 10);
 
 				// Create some colors
 				$white = imagecolorallocate($im, 255, 255, 255);
